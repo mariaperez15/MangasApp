@@ -13,23 +13,22 @@ struct MangasModel: Codable  {
 }
 
 struct MangaModel: Codable, Identifiable, Hashable {
-    var id = UUID()
     let genres: [GenresModel]
     let mainPicture: String
-    let background: String?
+    let background: String
     let themes: [ThemesModel]
     let url: String
-    let mangaID: Int
+    let id: Int
     let volumes: Int?
     let titleJapanese: String
     let endDate: String?
     let chapters: Int?
-    let sypnosis: String?
+    let sypnosis: String
     let status: String
     let score: Double
     let title: String
     let startDate: String?
-    let titleEnglish: String?
+    let titleEnglish: String
     let authors: [AuthorsModel]
     let demographics: [DemographicsModel]
     

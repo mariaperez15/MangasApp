@@ -11,7 +11,8 @@ import SwiftUI
 struct MangasAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            //MangasListView()
+            FiltersView()
         }
     }
 }

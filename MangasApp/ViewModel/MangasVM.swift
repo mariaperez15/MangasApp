@@ -8,6 +8,31 @@
 import Foundation
 import SwiftUI
 
+enum Filters: String, CaseIterable, Identifiable {
+    var id: Self {self}
+    
+    case all = "All"
+    case genres = "By genre"
+    case themes = "By theme"
+    case demographics = "By demographics"
+    case bestMangas = "Best mangas"
+    
+    var description: String {
+        switch self {
+        case .all:
+            "Show all mangas"
+        case .genres:
+            "Filter by genre"
+        case .themes:
+            "Filter by theme"
+        case .demographics:
+            "Filter by demographics"
+        case .bestMangas:
+            "Show best mangas"
+        }
+    }
+}
+
 @Observable
 final class MangasVM {
     let repository: MangasRepositoryProtocol
@@ -15,6 +40,7 @@ final class MangasVM {
     var mangasInfo: MangasModel?
     var page: Int = 1
     var searchedText = ""
+    var currentFilter: Filters = .all
     
     
     init(repository: MangasRepositoryProtocol = MangasRepository()) {
@@ -30,18 +56,30 @@ final class MangasVM {
         if searchedText.isEmpty {
             await loadAllMangas()
         } else {
-            await loadSearchedMangas()
+            resetMangas()
+            switch currentFilter {
+            case .all:
+                await loadAllMangas()
+            case .genres:
+                return
+            case .themes:
+                return
+            case .demographics:
+                return
+            case .bestMangas:
+                return
+            }
         }
     }
     
     func loadAllMangas() async {
-            do {
-                let data = try await repository.getData(page: String(page))
-                self.mangasInfo = data
-                mangas += data.items
-            } catch {
-                print(error)
-            }
+        do {
+            let data = try await repository.getData(page: String(page))
+            self.mangasInfo = data
+            mangas += data.items
+        } catch {
+            print(error)
+        }
     }
     
     func loadSearchedMangas() async {
@@ -54,7 +92,7 @@ final class MangasVM {
             print(error)
         }
     }
-
+    
     func loadImage(manga: MangaModel) async -> UIImage {
         let cleanedURL = manga.mainPicture.replacingOccurrences(of: "\"", with: "")
         let imageSystem = UIImage(systemName: "photo") ?? UIImage()
@@ -89,6 +127,14 @@ final class MangasVM {
                 }
             }
         }
-    }    
+    }
+    
+    func setFilter(filter: Filters) {
+        currentFilter = filter
+        resetMangas()
+        Task {
+            await loadMangas()
+        }
+    }
 }
 
