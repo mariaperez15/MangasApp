@@ -50,7 +50,7 @@ struct MangaModelDTO: Codable, Identifiable {
             background: background ?? "Background not available",
             themes: themes.map(\.mapToModel),
             url: url,
-            id: id,
+            mangaID: id,
             volumes: volumes,
             titleJapanese: titleJapanese ?? "Title japanese not available",
             endDate: endDate,

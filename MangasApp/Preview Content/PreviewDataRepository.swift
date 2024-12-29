@@ -35,6 +35,7 @@ extension MangasVM {
 
 extension MangaModel {
     static let mangaPreview: MangaModel = MangaModel(
+        id: UUID(uuidString: "3f7b5d9e-8a2c-4f1d-b6e4-9c0d2a3f8b7a")!,
         genres: [
             GenresModel(id: UUID(uuidString: "4C13067F-96FF-4F14-A1C0-B33215F24E0B")!, genre: "Award Winning"),
             GenresModel(id: UUID(uuidString: "4312867C-1359-494A-AC46-BADFD2E1D4CD")!, genre: "Drama"),
@@ -47,7 +48,7 @@ extension MangaModel {
             ThemesModel(id: UUID(uuidString: "4394C99F-615B-494A-929E-356A342A95B8")!, theme: "Psychological")
         ],
         url: "https://myanimelist.net/manga/1/Monster",
-        id: 1,
+        mangaID: 1,
         volumes: 18,
         titleJapanese: "MONSTER",
         endDate: "2001-12-20T00:00:00Z",
