@@ -8,21 +8,20 @@
 import SwiftUI
 
 struct FiltersView: View {
-    @State var vm = MangasVM()
-    @State var filters: Filters = .all
+    @Environment(MangasVM.self) var vm
     
     var body: some View {
         NavigationStack {
             List(Filters.allCases) { filter in
                 NavigationLink(value: filter) {
-                        VStack(alignment: .leading) {
-                            Text(filter.rawValue)
-                                .font(.title3)
-                                .fontWeight(.semibold)
-                            Text(filter.description)
-                                .foregroundColor(.secondary)
-                        }
-                        .padding(.vertical, 9)
+                    VStack(alignment: .leading) {
+                        Text(filter.rawValue)
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                        Text(filter.description)
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(.vertical, 9)
                 }
             }
             .navigationTitle("Filters")
@@ -31,16 +30,28 @@ struct FiltersView: View {
                 MangaDetailComponent(manga: manga)
             }
             .navigationDestination(for: Filters.self) { filter in
-                MangasListView(vm: vm)
-                    .task {
-                        vm.setFilter(filter: filter)
-                    }
+                switch filter {
+                case .all:
+                    MangasListView()
+                        .task {
+                            vm.setFilter(filter: filter, optionSelected: nil)
+                        }
+                case .genre, .theme, .demographic:
+                    SubFiltersView()
+                        .task {
+                            await vm.loadFilterOptions(filter: filter)
+                        }
+                case .bestMangas:
+                    MangasListView()
+                }
             }
             .listStyle(.plain)
         }
     }
 }
 
+
 #Preview {
     FiltersView()
+        .environment(MangasVM.preview)
 }

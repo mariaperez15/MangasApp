@@ -12,20 +12,20 @@ enum Filters: String, CaseIterable, Identifiable {
     var id: Self {self}
     
     case all = "All"
-    case genres = "By genre"
-    case themes = "By theme"
-    case demographics = "By demographics"
+    case genre = "By genre"
+    case theme = "By theme"
+    case demographic = "By demographic"
     case bestMangas = "Best mangas"
     
     var description: String {
         switch self {
         case .all:
             "Show all mangas"
-        case .genres:
+        case .genre:
             "Filter by genre"
-        case .themes:
+        case .theme:
             "Filter by theme"
-        case .demographics:
+        case .demographic:
             "Filter by demographics"
         case .bestMangas:
             "Show best mangas"
@@ -41,6 +41,8 @@ final class MangasVM {
     var page: Int = 1
     var searchedText = ""
     var currentFilter: Filters = .all
+    var selectedSubfilter: String = ""
+    var filterOptions: [String] = []
     
     
     init(repository: MangasRepositoryProtocol = MangasRepository()) {
@@ -54,27 +56,27 @@ final class MangasVM {
     
     func loadMangas() async {
         if searchedText.isEmpty {
-            await loadAllMangas()
-        } else {
             resetMangas()
             switch currentFilter {
             case .all:
                 await loadAllMangas()
-            case .genres:
-                return
-            case .themes:
-                return
-            case .demographics:
-                return
+            case .genre:
+                await loadMangasBy(orderBy: "Genre", param: selectedSubfilter)
+            case .theme:
+                await loadMangasBy(orderBy: "Theme", param: selectedSubfilter)
+            case .demographic:
+                await loadMangasBy(orderBy: "Demographic", param: selectedSubfilter)
             case .bestMangas:
                 return
             }
+        } else {
+            await loadSearchedMangas()
         }
     }
     
     func loadAllMangas() async {
         do {
-            let data = try await repository.getData(page: String(page))
+            let data = try await repository.getAllMangas(page: String(page))
             self.mangasInfo = data
             mangas += data.items
         } catch {
@@ -129,12 +131,42 @@ final class MangasVM {
         }
     }
     
-    func setFilter(filter: Filters) {
-        currentFilter = filter
+    func setFilter(filter: Filters?, optionSelected: String?) {
+        if let filter = filter {
+            currentFilter = filter
+        }
+        if let optionSelected = optionSelected {
+            selectedSubfilter = optionSelected
+        }
         resetMangas()
         Task {
             await loadMangas()
         }
     }
+    
+    func loadMangasBy(orderBy: String, param: String) async {
+        do {
+            mangas.removeAll()
+            let data = try await repository.getMangaBy(orderBy: orderBy, selectedFilter: param)
+            self.mangasInfo = data
+            mangas += data.items
+        } catch {
+            print(error)
+        }
+    }
+    
+    func loadFilterOptions(filter: Filters) async {
+        do {
+            currentFilter = filter
+            filterOptions.removeAll()
+            print("filterOptions: \(filterOptions)")
+            print("currentFilter.rawValue: \(currentFilter.rawValue)")
+            let filterSelected = String(currentFilter.rawValue.split(separator: " ")[1]) + "s"
+            filterOptions = try await repository.getFilterOptions(selectedFilter: filterSelected)
+        } catch {
+            print(error)
+        }
+    }
+    
 }
 

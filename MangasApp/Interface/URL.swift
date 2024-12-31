@@ -25,6 +25,20 @@ extension URL {
             .appending(path: "mangasContains")
             .appending(path: name)
     }
+    
+    //Endpoint get mangas by...
+    static func getManbasBy(orderBy: String, selectedFilter: String) -> URL {
+        mainURL
+            .appending(path: "list")
+            .appending(path: "mangaBy" + orderBy)
+            .appending(path: selectedFilter)
+    }
+    
+    static func getFilterOptions(selectedFilter: String) -> URL {
+        mainURL
+            .appending(path: "list")
+            .appending(path: selectedFilter)
+    }
 }
 
 extension URLQueryItem {

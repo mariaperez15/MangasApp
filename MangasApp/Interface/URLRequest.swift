@@ -8,7 +8,7 @@
 import Foundation
 
 extension URLRequest {
-    static func getURLRequest(url: URL) -> URLRequest {
+    static func getMangasRequest(url: URL) -> URLRequest {
         return URLRequest(url: url)
     }
 }

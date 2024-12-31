@@ -8,6 +8,26 @@
 import Foundation
 
 struct PreviewDataRepository: MangasRepositoryProtocol {
+    func getFilterOptions(selectedFilter: String) async throws(NetworkError) -> [String] {
+        let url = Bundle.main.url(forResource: "PreviewData", withExtension: "json")!
+        do {
+            let data = try Data(contentsOf: url)
+            return try JSONDecoder().decode([String].self, from: data)
+        } catch {
+            throw .badJSONDecoder(error)
+        }
+    }
+    
+    func getMangaBy(orderBy: String, selectedFilter: String) async throws(NetworkError) -> MangasModel {
+        let url = Bundle.main.url(forResource: "PreviewData", withExtension: "json")!
+        do {
+            let data = try Data(contentsOf: url)
+            return try JSONDecoder().decode(MangasModel.self, from: data)
+        } catch {
+            throw .badJSONDecoder(error)
+        }
+    }
+    
     func getMangaContains(name: String) async throws(NetworkError) -> MangasModel {
         let url = Bundle.main.url(forResource: "PreviewData", withExtension: "json")!
         do {
@@ -18,7 +38,7 @@ struct PreviewDataRepository: MangasRepositoryProtocol {
         }
     }
     
-    func getData(page: String) async throws(NetworkError) -> MangasModel {
+    func getAllMangas(page: String) async throws(NetworkError) -> MangasModel {
         let url = Bundle.main.url(forResource: "PreviewData", withExtension: "json")!
         do {
             let data = try Data(contentsOf: url)

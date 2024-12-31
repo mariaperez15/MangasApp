@@ -13,6 +13,7 @@ protocol NetworkRepositoryProtocol {
 extension NetworkRepositoryProtocol {
     func getJSON<MODEL>(model: MODEL.Type, urlRequest: URLRequest) async throws(NetworkError) -> MODEL where MODEL:Codable {
         let (data, response) = try await URLSession.shared.getCustomData(urlRequest: urlRequest)
+        print("urlRequest: \(urlRequest)")
         if response.statusCode == 200{
             do {
                 return try JSONDecoder().decode(model, from: data)

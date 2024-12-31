@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct MangasListView: View {
-    @State var vm = MangasVM()
-    
+    @Environment(MangasVM.self) var vm
     @State private var timer: Timer?
     
     var body: some View {
-        //@Bindable var bvm = vm -> para cuando el viewmodel se pasa como enviroment
+        @Bindable var bvm = vm //para cuando el viewmodel se pasa como enviroment
         List(vm.mangas) { manga in
             NavigationLink(value: manga) {
                 MangaCellComponent(manga: manga)
@@ -23,14 +22,15 @@ struct MangasListView: View {
             }
         }
         .listStyle(.plain)
-        .task {
+        /*.task {
             if vm.mangas.isEmpty {
                 await vm.loadMangas()
             }
         }
+         */
         .navigationTitle("All mangas")
         .navigationBarTitleDisplayMode(.inline)
-        .searchable(text: $vm.searchedText, prompt: "Search manga by name")
+        .searchable(text: $bvm.searchedText, prompt: "Search manga by name")
         .onChange(of: vm.searchedText) {
             timer?.invalidate()
             timer = .scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
@@ -40,12 +40,10 @@ struct MangasListView: View {
                 }
             }
         }
-        .task {
-            vm.setFilter(filter: filter)
-        }
     }
 }
 
 #Preview {
-    MangasListView(vm: .preview)
+    MangasListView()
+        .environment(MangasVM.preview)
 }
