@@ -56,7 +56,6 @@ final class MangasVM {
     
     func loadMangas() async {
         if searchedText.isEmpty {
-            resetMangas()
             switch currentFilter {
             case .all:
                 await loadAllMangas()
@@ -78,6 +77,7 @@ final class MangasVM {
         do {
             let data = try await repository.getAllMangas(page: String(page))
             self.mangasInfo = data
+            print("pagina: \(page)")
             mangas += data.items
         } catch {
             print(error)
@@ -124,6 +124,7 @@ final class MangasVM {
         if page < mangasInfo.metadata.total {
             if isLast(manga: manga) {
                 page += 1
+                print("Sumar pagina!")
                 Task {
                     await loadMangas()
                 }
@@ -138,6 +139,7 @@ final class MangasVM {
         if let optionSelected = optionSelected {
             selectedSubfilter = optionSelected
         }
+        //mirar si aquí hay que resetear o no esto
         resetMangas()
         Task {
             await loadMangas()
@@ -157,7 +159,10 @@ final class MangasVM {
     
     func loadFilterOptions(filter: Filters) async {
         do {
-            currentFilter = filter
+            if currentFilter != filter{
+                resetMangas()
+                currentFilter = filter
+            }
             filterOptions.removeAll()
             print("filterOptions: \(filterOptions)")
             print("currentFilter.rawValue: \(currentFilter.rawValue)")

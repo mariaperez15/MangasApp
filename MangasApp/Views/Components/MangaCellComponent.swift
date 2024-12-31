@@ -30,8 +30,8 @@ struct MangaCellComponent: View {
         AsyncImage(url: manga.cleanURL) { image in
             image
                 .resizable()
-                .scaledToFill()
-                .frame(width: 120, height: 130)
+                .scaledToFit()
+                .frame(width: 90)
                 .clipShape(RoundedRectangle(cornerRadius: 15))
                 .shadow(color: .gray.opacity(0.5), radius: 4, x: 4, y: 4)
         } placeholder: {
@@ -51,6 +51,7 @@ struct MangaCellComponent: View {
             .lineLimit(1)
     }
     private var mangaSynopsis: some View {
+        //TODO: puntuación
         Text(manga.sypnosis)
             .lineLimit(2)
             .font(.subheadline)

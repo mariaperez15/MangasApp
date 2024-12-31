@@ -20,7 +20,7 @@ struct MangasListView: View {
             }
         }
          */
-        .navigationTitle("All mangas")
+            .navigationTitle(vm.selectedSubfilter)
         .navigationBarTitleDisplayMode(.inline)
         .searchable(text: $bvm.searchedText, prompt: "Search manga by name")
         .onChange(of: vm.searchedText) {

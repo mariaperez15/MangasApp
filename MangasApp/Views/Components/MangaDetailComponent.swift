@@ -9,17 +9,22 @@ import SwiftUI
 
 struct MangaDetailComponent: View {
     let manga: MangaModel
+   @State var expandSynopsis = false
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 60) {
+            VStack() {
                 mangaImage
-                Spacer()
-                VStack {
-                    mangaTitle
-                    mangaSypnosis
+                mangaTitle
+                mangaSypnosis
+                Button {
+                    expandSynopsis.toggle()
+                } label: {
+                    Text(expandSynopsis ? "Hide" : "Show more")
                 }
+
             }
+            .animation(.smooth, value: expandSynopsis)
         }
         .ignoresSafeArea(edges: .top)
     }
@@ -28,7 +33,8 @@ struct MangaDetailComponent: View {
         AsyncImage(url: manga.cleanURL) { image in
             image
                 .resizable()
-                .scaledToFill()
+                .scaledToFit()
+                .frame(maxWidth: .infinity)
                 .cornerRadius(12)
                 .clipped()
         } placeholder: {
@@ -37,12 +43,11 @@ struct MangaDetailComponent: View {
                 .scaledToFit()
                 .frame(width: 100, height: 100)
                 .cornerRadius(12)
-            
         }
         .background(ignoresSafeAreaEdges: .top)
         .shadow(radius: 10)
-        .frame(height: 350)
-
+        //.frame(height: 300)
+        
     }
     private var mangaTitle: some View {
         Text(manga.title)
@@ -54,6 +59,7 @@ struct MangaDetailComponent: View {
             .font(.body)
             .padding(.horizontal)
             .foregroundColor(.secondary)
+            .lineLimit(expandSynopsis ? nil : 2)
     }
 }
 
