@@ -39,6 +39,12 @@ extension URL {
             .appending(path: "list")
             .appending(path: selectedFilter)
     }
+    
+    static func getBestMangas() -> URL {
+        mainURL
+            .appending(path: "list")
+            .appending(path: "bestMangas")
+    }
 }
 
 extension URLQueryItem {

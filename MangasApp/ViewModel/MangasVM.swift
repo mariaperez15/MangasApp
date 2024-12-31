@@ -67,7 +67,7 @@ final class MangasVM {
             case .demographic:
                 await loadMangasBy(orderBy: "Demographic", param: selectedSubfilter)
             case .bestMangas:
-                return
+                await loadBestMangas()
             }
         } else {
             await loadSearchedMangas()
@@ -163,6 +163,17 @@ final class MangasVM {
             print("currentFilter.rawValue: \(currentFilter.rawValue)")
             let filterSelected = String(currentFilter.rawValue.split(separator: " ")[1]) + "s"
             filterOptions = try await repository.getFilterOptions(selectedFilter: filterSelected)
+        } catch {
+            print(error)
+        }
+    }
+    
+    func loadBestMangas() async {
+        do {
+            mangas.removeAll()
+            let data = try await repository.getBestMangas()
+            self.mangasInfo = data
+            mangas += data.items
         } catch {
             print(error)
         }

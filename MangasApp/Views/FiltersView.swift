@@ -9,29 +9,48 @@ import SwiftUI
 
 struct FiltersView: View {
     @Environment(MangasVM.self) var vm
+    @State private var timer: Timer?
     
     var body: some View {
+        @Bindable var bvm = vm
         NavigationStack {
-            List(Filters.allCases) { filter in
-                NavigationLink(value: filter) {
-                    VStack(alignment: .leading) {
-                        Text(filter.rawValue)
-                            .font(.title3)
-                            .fontWeight(.semibold)
-                        Text(filter.description)
-                            .foregroundColor(.secondary)
+            VStack {
+                if vm.searchedText.isEmpty {
+                    List(Filters.allCases) { filter in
+                        NavigationLink(value: filter) {
+                            VStack(alignment: .leading) {
+                                Text(filter.rawValue)
+                                    .font(.title3)
+                                    .fontWeight(.semibold)
+                                Text(filter.description)
+                                    .foregroundColor(.secondary)
+                            }
+                            .padding(.vertical, 9)
+                        }
                     }
-                    .padding(.vertical, 9)
+                } else {
+                    MangaListComponent()
                 }
             }
+            
             .navigationTitle("Filters")
             .navigationBarTitleDisplayMode(.inline)
+            .searchable(text: $bvm.searchedText, prompt: "Search manga by name")
+            .onChange(of: vm.searchedText) {
+                timer?.invalidate()
+                timer = .scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+                    Task {
+                        await vm.resetMangas()
+                        await vm.loadMangas()
+                    }
+                }
+            }
             .navigationDestination(for: MangaModel.self) { manga in
                 MangaDetailComponent(manga: manga)
             }
             .navigationDestination(for: Filters.self) { filter in
                 switch filter {
-                case .all:
+                case .all, .bestMangas:
                     MangasListView()
                         .task {
                             vm.setFilter(filter: filter, optionSelected: nil)
@@ -41,8 +60,6 @@ struct FiltersView: View {
                         .task {
                             await vm.loadFilterOptions(filter: filter)
                         }
-                case .bestMangas:
-                    MangasListView()
                 }
             }
             .listStyle(.plain)

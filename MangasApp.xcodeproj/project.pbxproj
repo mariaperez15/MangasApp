@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FC53168E2D23FBF000B12F77 /* SubFiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC53168D2D23FBF000B12F77 /* SubFiltersView.swift */; };
+		FC5316902D244D3C00B12F77 /* MangaListComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC53168F2D244D3C00B12F77 /* MangaListComponent.swift */; };
 		FCA04BA62D1D7D4E0013A437 /* MangasModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA04BA52D1D7D4E0013A437 /* MangasModel.swift */; };
 		FCA04BA82D1D841A0013A437 /* NetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA04BA72D1D841A0013A437 /* NetworkRepository.swift */; };
 		FCA04BAA2D1EC2730013A437 /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA04BA92D1EC2730013A437 /* URLRequest.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		FC53168D2D23FBF000B12F77 /* SubFiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubFiltersView.swift; sourceTree = "<group>"; };
+		FC53168F2D244D3C00B12F77 /* MangaListComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaListComponent.swift; sourceTree = "<group>"; };
 		FCA04BA52D1D7D4E0013A437 /* MangasModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangasModel.swift; sourceTree = "<group>"; };
 		FCA04BA72D1D841A0013A437 /* NetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepository.swift; sourceTree = "<group>"; };
 		FCA04BA92D1EC2730013A437 /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 			children = (
 				FCA04BB32D1F62EC0013A437 /* MangaCellComponent.swift */,
 				FCA04BB82D215A700013A437 /* MangaDetailComponent.swift */,
+				FC53168F2D244D3C00B12F77 /* MangaListComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				FCA04BB42D1F62EC0013A437 /* MangaCellComponent.swift in Sources */,
 				FCA04BA82D1D841A0013A437 /* NetworkRepository.swift in Sources */,
 				FC53168E2D23FBF000B12F77 /* SubFiltersView.swift in Sources */,
+				FC5316902D244D3C00B12F77 /* MangaListComponent.swift in Sources */,
 				FCF56DA22D0E29DC00255E87 /* URL.swift in Sources */,
 				FCA04BB92D215A700013A437 /* MangaDetailComponent.swift in Sources */,
 			);

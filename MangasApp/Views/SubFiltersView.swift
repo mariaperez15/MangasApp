@@ -23,6 +23,7 @@ struct SubFiltersView: View {
                     vm.setFilter(filter: nil, optionSelected: filterOption)
                 }
         }
+        .listStyle(.plain)
     }
 }
 

@@ -13,15 +13,7 @@ struct MangasListView: View {
     
     var body: some View {
         @Bindable var bvm = vm //para cuando el viewmodel se pasa como enviroment
-        List(vm.mangas) { manga in
-            NavigationLink(value: manga) {
-                MangaCellComponent(manga: manga)
-                    .onAppear {
-                        vm.loadNextPage(manga: manga)
-                    }
-            }
-        }
-        .listStyle(.plain)
+        MangaListComponent()
         /*.task {
             if vm.mangas.isEmpty {
                 await vm.loadMangas()
