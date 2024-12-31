@@ -13,8 +13,7 @@ struct MangasAppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            //MangasListView()
-            FiltersView()
+            HomeView()
                 .environment(mangasVM)
         }
     }
