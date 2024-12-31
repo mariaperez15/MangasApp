@@ -27,11 +27,12 @@ extension URL {
     }
     
     //Endpoint get mangas by...
-    static func getManbasBy(orderBy: String, selectedFilter: String) -> URL {
+    static func getManbasBy(orderBy: String, selectedFilter: String, page: String) -> URL {
         mainURL
             .appending(path: "list")
             .appending(path: "mangaBy" + orderBy)
             .appending(path: selectedFilter)
+            .appending(queryItems: [.pageQuery(page: page)])
     }
     
     static func getFilterOptions(selectedFilter: String) -> URL {
@@ -40,10 +41,11 @@ extension URL {
             .appending(path: selectedFilter)
     }
     
-    static func getBestMangas() -> URL {
+    static func getBestMangas(page: String) -> URL {
         mainURL
             .appending(path: "list")
             .appending(path: "bestMangas")
+            .appending(queryItems: [.pageQuery(page: page)])
     }
 }
 

@@ -10,9 +10,9 @@ import Foundation
 protocol MangasRepositoryProtocol {
     func getAllMangas(page: String) async throws(NetworkError) -> MangasModel
     func getMangaContains(name: String) async throws(NetworkError) -> MangasModel
-    func getMangaBy(orderBy: String, selectedFilter: String) async throws(NetworkError) -> MangasModel
+    func getMangaBy(orderBy: String, selectedFilter: String, page: String) async throws(NetworkError) -> MangasModel
     func getFilterOptions(selectedFilter:String) async throws(NetworkError) -> [String]
-    func getBestMangas() async throws(NetworkError) -> MangasModel
+    func getBestMangas(page: String) async throws(NetworkError) -> MangasModel
 }
 
 struct MangasRepository: MangasRepositoryProtocol, NetworkRepositoryProtocol {
@@ -24,16 +24,16 @@ struct MangasRepository: MangasRepositoryProtocol, NetworkRepositoryProtocol {
         try await getJSON(model: MangasModelDTO.self, urlRequest: .getMangasRequest(url: .searchMangaContains(name: name))).mapToModel
     }
     
-    func getMangaBy(orderBy: String, selectedFilter: String) async throws(NetworkError) -> MangasModel {
-        try await getJSON(model: MangasModelDTO.self, urlRequest: .getMangasRequest(url: .getManbasBy(orderBy: orderBy, selectedFilter: selectedFilter))).mapToModel
+    func getMangaBy(orderBy: String, selectedFilter: String, page: String) async throws(NetworkError) -> MangasModel {
+        try await getJSON(model: MangasModelDTO.self, urlRequest: .getMangasRequest(url: .getManbasBy(orderBy: orderBy, selectedFilter: selectedFilter, page: page))).mapToModel
     }
     
     func getFilterOptions(selectedFilter: String) async throws(NetworkError) -> [String] {
         try await getJSON(model: [String].self, urlRequest: .getMangasRequest(url: .getFilterOptions(selectedFilter: selectedFilter)))
     }
     
-    func getBestMangas() async throws(NetworkError) -> MangasModel {
-        try await getJSON(model: MangasModelDTO.self, urlRequest: .getMangasRequest(url: .getBestMangas())).mapToModel
+    func getBestMangas(page: String) async throws(NetworkError) -> MangasModel {
+        try await getJSON(model: MangasModelDTO.self, urlRequest: .getMangasRequest(url: .getBestMangas(page: page))).mapToModel
     }
 }
 

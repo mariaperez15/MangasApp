@@ -8,7 +8,7 @@
 import Foundation
 
 struct PreviewDataRepository: MangasRepositoryProtocol {
-    func getBestMangas() async throws(NetworkError) -> MangasModel {
+    func getBestMangas(page: String) async throws(NetworkError) -> MangasModel {
         let url = Bundle.main.url(forResource: "PreviewData", withExtension: "json")!
         do {
             let data = try Data(contentsOf: url)
@@ -28,7 +28,7 @@ struct PreviewDataRepository: MangasRepositoryProtocol {
         }
     }
     
-    func getMangaBy(orderBy: String, selectedFilter: String) async throws(NetworkError) -> MangasModel {
+    func getMangaBy(orderBy: String, selectedFilter: String, page: String) async throws(NetworkError) -> MangasModel {
         let url = Bundle.main.url(forResource: "PreviewData", withExtension: "json")!
         do {
             let data = try Data(contentsOf: url)
