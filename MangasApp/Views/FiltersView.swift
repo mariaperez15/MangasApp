@@ -33,7 +33,7 @@ struct FiltersView: View {
                 }
             }
             
-            .navigationTitle("Filters")
+            .navigationTitle(vm.currentFilter.rawValue)
             .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $bvm.searchedText, prompt: "Search manga by name")
             .onChange(of: vm.searchedText) {

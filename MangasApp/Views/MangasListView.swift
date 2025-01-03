@@ -20,7 +20,7 @@ struct MangasListView: View {
             }
         }
          */
-            .navigationTitle(vm.selectedSubfilter)
+            .navigationTitle(vm.currentFilter.description == "Show all mangas" || vm.currentFilter.description == "Show best mangas" ? vm.currentFilter.rawValue : vm.selectedSubfilter)
         .navigationBarTitleDisplayMode(.inline)
         .searchable(text: $bvm.searchedText, prompt: "Search manga by name")
         .onChange(of: vm.searchedText) {
