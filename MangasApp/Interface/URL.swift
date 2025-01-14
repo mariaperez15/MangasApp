@@ -47,6 +47,11 @@ extension URL {
             .appending(path: "bestMangas")
             .appending(queryItems: [.pageQuery(page: page)])
     }
+    
+    static func registUser() -> URL {
+        mainURL
+            .appending(path: "users")
+    }
 }
 
 extension URLQueryItem {
