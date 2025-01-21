@@ -116,6 +116,6 @@ extension MangaModel {
 
 }
 
-extension UsersVM {
-    static let preview = UsersVM(repository: PreviewDataRepository())
+extension LoginVM {
+    static let preview = LoginVM(repository: LoginRepository())
 }

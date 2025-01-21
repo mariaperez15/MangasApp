@@ -52,6 +52,12 @@ extension URL {
         mainURL
             .appending(path: "users")
     }
+    
+    static func loginUser() -> URL {
+        mainURL
+            .appending(path: "users")
+            .appending(path: "login")
+    }
 }
 
 extension URLQueryItem {

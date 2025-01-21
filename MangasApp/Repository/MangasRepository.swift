@@ -13,11 +13,9 @@ protocol MangasRepositoryProtocol {
     func getMangaBy(orderBy: String, selectedFilter: String, page: String) async throws(NetworkError) -> MangasModel
     func getFilterOptions(selectedFilter:String) async throws(NetworkError) -> [String]
     func getBestMangas(page: String) async throws(NetworkError) -> MangasModel
-    func registUser(email: String, password: String) async throws(NetworkError) -> String
 }
 
 struct MangasRepository: MangasRepositoryProtocol, NetworkRepositoryProtocol {
-    let apiConfig = APIConfig.shared
     
     func getAllMangas(page: String) async throws(NetworkError) -> MangasModel {
         try await getJSON(model: MangasModelDTO.self, urlRequest: .getMangasRequest(url: .getAllMangas(page: page))).mapToModel
@@ -38,9 +36,6 @@ struct MangasRepository: MangasRepositoryProtocol, NetworkRepositoryProtocol {
     func getBestMangas(page: String) async throws(NetworkError) -> MangasModel {
         try await getJSON(model: MangasModelDTO.self, urlRequest: .getMangasRequest(url: .getBestMangas(page: page))).mapToModel
     }
-    
-    func registUser(email: String, password: String) async throws(NetworkError) -> String {
-        try await getJSON(model: String.self, urlRequest: .postUser(url: .registUser(), token: apiConfig.token, email: email, password: password))
-    }
+        
 }
 

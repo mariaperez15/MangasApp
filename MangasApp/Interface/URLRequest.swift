@@ -12,28 +12,22 @@ extension URLRequest {
         return URLRequest(url: url)
     }
     
-    static func postUser(url: URL, token: String?, email: String, password: String) -> URLRequest {
+    static func postUser(url: URL, token: String?, user: User) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         if let token {
             request.setValue(token, forHTTPHeaderField: "App-Token")
-            print(token)
         }
         
-        let body: [String:String] = [
-            "email": email,
-            "password": password
-        ]
-        
-        if let jsonData = try? JSONSerialization.data(withJSONObject: body) {
+        do {
+            let jsonData = try JSONEncoder().encode(user)
             request.httpBody = jsonData
-        } else {
-            //TODO: aqui habría que lanzar error o vale con el print o no hay que tener este else?
-            print("Error al convertir el cuerpo a JSON")
+        } catch {
+            print("Error al codificar JSON: \(error)")
         }
-        print(body)
+        
         return request
     }
 }

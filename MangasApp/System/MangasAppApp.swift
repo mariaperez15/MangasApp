@@ -10,11 +10,13 @@ import SwiftUI
 @main
 struct MangasAppApp: App {
     @State var mangasVM = MangasVM()
-    @State var usersVM = UsersVM()
+    @State var usersVM = LoginVM()
     
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            LoginView()
+            // si el usuario ya esta logeado, muestro directamente el homeview, sino el loginView
+            //HomeView()
                 .environment(mangasVM)
                 .environment(usersVM)
         }
