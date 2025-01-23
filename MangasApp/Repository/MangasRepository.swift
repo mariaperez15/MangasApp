@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol MangasRepositoryProtocol {
+protocol MangasRepositoryProtocol: Sendable {
     func getAllMangas(page: String) async throws(NetworkError) -> MangasModel
     func getMangaContains(name: String) async throws(NetworkError) -> MangasModel
     func getMangaBy(orderBy: String, selectedFilter: String, page: String) async throws(NetworkError) -> MangasModel

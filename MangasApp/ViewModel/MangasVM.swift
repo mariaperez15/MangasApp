@@ -33,6 +33,7 @@ enum Filters: String, CaseIterable, Identifiable {
     }
 }
 
+@MainActor
 @Observable
 final class MangasVM {
     let repository: MangasRepositoryProtocol

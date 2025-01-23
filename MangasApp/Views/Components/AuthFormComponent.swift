@@ -10,6 +10,7 @@ import SwiftUI
 struct AuthFormComponent: View {
     var title: String
     var buttonText: String
+    var action: () -> Void
     
     @Environment(LoginVM.self) var vm
     
@@ -36,9 +37,7 @@ struct AuthFormComponent: View {
         }
         .padding()
         Button {
-            Task {
-                await vm.registUser()
-            }
+            action()
         } label: {
             Text(buttonText)
                 .font(.headline)
@@ -58,5 +57,8 @@ struct AuthFormComponent: View {
 }
 
 #Preview {
-    AuthFormComponent(title: "Log in", buttonText: "Log in")
+    AuthFormComponent(title: "Log in", buttonText: "Log in") {
+        print("Estoy pulsando el botón")
+    }
+    .environment(LoginVM.preview)
 }

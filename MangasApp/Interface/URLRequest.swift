@@ -12,7 +12,7 @@ extension URLRequest {
         return URLRequest(url: url)
     }
     
-    static func postUser(url: URL, token: String?, user: User) -> URLRequest {
+    static func postUser(url: URL, token: String?, user: User? = nil, userAuth: String? = nil) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -21,13 +21,21 @@ extension URLRequest {
             request.setValue(token, forHTTPHeaderField: "App-Token")
         }
         
-        do {
-            let jsonData = try JSONEncoder().encode(user)
-            request.httpBody = jsonData
-        } catch {
-            print("Error al codificar JSON: \(error)")
+        if let user {
+            do {
+                let jsonData = try JSONEncoder().encode(user)
+                request.httpBody = jsonData
+            } catch {
+                print("Error al codificar JSON: \(error)")
+            }
         }
+        
+        if let userAuth {
+            request.setValue(userAuth, forHTTPHeaderField: "Authorization")
+        }
+        
         
         return request
     }
+    
 }

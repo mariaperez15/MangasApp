@@ -13,4 +13,5 @@ enum NetworkError: Error {
     case badURLRequest(Error)
     case badStatusCode(Int)
     case badJSONDecoder(Error)
+    case unauthorized
 }

@@ -11,8 +11,7 @@ struct HomeView: View {
     var body: some View {
         TabView {
             Tab {
-                //TODO: temporal, no va aquí
-                RegisterView()
+                
             } label: {
                 Label("Reading now", systemImage: "book.fill")
             }

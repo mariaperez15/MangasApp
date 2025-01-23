@@ -69,6 +69,7 @@ struct PreviewDataRepository: MangasRepositoryProtocol {
     }
 }
 
+@MainActor
 extension MangasVM {
     static let preview = MangasVM(repository: PreviewDataRepository())
 }
@@ -116,6 +117,7 @@ extension MangaModel {
 
 }
 
+@MainActor
 extension LoginVM {
     static let preview = LoginVM(repository: LoginRepository())
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class KeyChainManager {
+final class KeyChainManager: Sendable {
     static let shared = KeyChainManager()
     
     func storeKey(key: Data, label: String) {
