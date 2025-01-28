@@ -8,9 +8,10 @@
 import SwiftUI
 
 @main
-struct MangasAppApp: App {
+struct MangasApp: App {
     @State var mangasVM = MangasVM()
     @State var usersVM = LoginVM()
+    @State var collectionVM = CollectionVM()
     var num = 2
     
     var body: some Scene {
@@ -26,6 +27,7 @@ struct MangasAppApp: App {
             //HomeView()
             .environment(mangasVM)
             .environment(usersVM)
+            .environment(collectionVM)
             .animation(.easeInOut, value: usersVM.isUserLogged)
         }
     }

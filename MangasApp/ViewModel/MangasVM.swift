@@ -81,7 +81,7 @@ final class MangasVM {
             print("pagina: \(page)")
             mangas += data.items
         } catch {
-            print(error)
+            print("load all mangas error:\(error)")
         }
     }
     
@@ -92,7 +92,7 @@ final class MangasVM {
             self.mangasInfo = data
             mangas += data.items
         } catch {
-            print(error)
+            print("load search error:\(error)")
         }
     }
     
@@ -176,7 +176,7 @@ final class MangasVM {
             let filterSelected = String(currentFilter.rawValue.split(separator: " ")[1]) + "s"
             filterOptions = try await repository.getFilterOptions(selectedFilter: filterSelected)
         } catch {
-            print(error)
+            print("load filter error:\(error)")
         }
     }
     
@@ -187,7 +187,7 @@ final class MangasVM {
             self.mangasInfo = data
             mangas += data.items
         } catch {
-            print(error)
+            print("load best mangas error:\(error)")
         }
     }
     

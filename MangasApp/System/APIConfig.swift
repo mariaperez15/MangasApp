@@ -7,21 +7,32 @@
 
 import Foundation
 
-struct APIConfig {
+actor APIConfig {
     static let shared  = APIConfig()
+    private let manager = KeyChainManager.shared
+    
     var token: String?
     
     private init() {
-        try? recoverAppToken()
+        Task {
+            try? await recoverAppToken()
+        }
+        print("He cogido el token apiconfig")
     }
     
-    private mutating func recoverAppToken() throws {
+    //private mutating func recoverAppToken() throws {
+    private func recoverAppToken() throws {
         guard let url = Bundle.main.url(forResource: "APIConfig", withExtension: ".plist") else {
             return
         }
         let data = try Data(contentsOf: url)
         let plist = try PropertyListDecoder().decode([String:String].self, from: data)
         token = plist["App-Token"]
+    }
+    
+    func readUserToken() -> String? {
+        guard let data = manager.readKey(label: "userToken") else { return nil }
+        return String(data: data, encoding: .utf8)
     }
     
 }

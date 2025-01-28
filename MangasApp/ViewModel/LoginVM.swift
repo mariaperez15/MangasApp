@@ -10,27 +10,32 @@ import Foundation
 @MainActor
 @Observable
 final class LoginVM {
-    var email: String = ""
-    var password: String = ""
     let repository: LoginRepositoryProtocol
+    let collectionvM = CollectionVM()
+    //var email: String = ""
+    var email: String = "157mariap@gmail.com"
+    //var password: String = ""
+    var password: String = "12345678"
     var isUserLogged = false
     var showAlertLoginError = false
     var showAlertErrorRegister = false
     var registerOkAlert = false
+    var isLoginCompleted = false
+
     
     init(repository: LoginRepositoryProtocol = LoginRepository()) {
         self.repository = repository
     }
     
     func registUser() async {
-        let user = User(email: email, password: password)
+        let user = UserModel(email: email, password: password)
         do {
             try await repository.registUser(user: user)
             //TODO: si se registra y va bien, tener propiedad booleana y lanzarla como un alert y ponga usuario registrado con exito y tenga un boton que ponga ok y que me lleve al login
             showAlertErrorRegister = false
             registerOkAlert = true
         } catch {
-            print(error)
+            print("register error:\(error)")
             showAlertErrorRegister = true
             registerOkAlert = false
         }
@@ -44,10 +49,13 @@ final class LoginVM {
         let auth = "Basic \(encodedCredentials.base64EncodedString())"
         do {
             try await repository.loginUser(userAuth: auth)
+            
+            //TODO: ver por que al hacer el getUSerCollection coge el token anterior y no el nuevo
+            await collectionvM.getUserCollection()
             isUserLogged = true
             showAlertLoginError = false
         } catch {
-            print(error)
+            print("Error login user: \(error)")
             isUserLogged = false
             showAlertLoginError = true
         }
@@ -81,3 +89,10 @@ final class LoginVM {
  2. crear grid view para elegir el user los mangas que tiene
  */
 
+//TODO: ultimo que he hecho jueves 23 es intentar hacer el getuserCollection pero me da error porque coge el token anterior
+
+//TODO: zanjar el tema de postear un manga, dandole a un boton de añadir a colección y que ahi se haga el post
+/*
+ 1. boton en el detalle que sea agregar a mi colección. Este boton deberá desplegar algo tipo un sheet, que ponga volumesOwned, por cual va lyendo y debajo un boton de confirm que cuando se le pulse, llamara a un metodo del VM que añadira un manga a la colección (pasando el id del manga, poner el volumes owned y por cual va que seran dos variables published en la vista y por ultimo el complete collection (manga.volumes si es == volumesOwned.count, para sacar el bool)
+ 2. una vez añadido a la colección, tendra que bajar el sheeet y el boton ya no pondra añadir a la colección sino quitar de la colección.
+ */

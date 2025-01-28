@@ -16,7 +16,7 @@ struct HomeView: View {
                 Label("Reading now", systemImage: "book.fill")
             }
             Tab {
-
+                CollectionView()
             } label: {
                 Label("Collections", systemImage: "books.vertical.fill")
             }

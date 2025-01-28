@@ -58,6 +58,12 @@ extension URL {
             .appending(path: "users")
             .appending(path: "login")
     }
+    
+    static func getUserCollection() -> URL {
+        mainURL
+            .appending(path: "collection")
+            .appending(path: "manga")
+    }
 }
 
 extension URLQueryItem {
