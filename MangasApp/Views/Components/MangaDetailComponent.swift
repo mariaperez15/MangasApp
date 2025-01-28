@@ -9,22 +9,36 @@ import SwiftUI
 
 struct MangaDetailComponent: View {
     let manga: MangaModel
-   @State var expandSynopsis = false
+    @State var expandSynopsis = false
+    @State var isSheetPresented = false
     
     var body: some View {
         ScrollView {
             VStack() {
                 mangaImage
-                mangaTitle
+                HStack {
+                    mangaTitle
+                        .padding()
+                    Button {
+                        isSheetPresented.toggle()
+                    } label: {
+                        Image(systemName: "plus.square.fill")
+                            .font(.title)
+                    }
+                    
+                }
                 mangaSypnosis
                 Button {
                     expandSynopsis.toggle()
                 } label: {
                     Text(expandSynopsis ? "Hide" : "Show more")
                 }
-
+                
             }
             .animation(.smooth, value: expandSynopsis)
+            .sheet(isPresented: $isSheetPresented) {
+                AddMangaSheetView()
+            }
         }
         .ignoresSafeArea(edges: .top)
     }

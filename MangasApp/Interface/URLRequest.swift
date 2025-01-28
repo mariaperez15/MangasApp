@@ -53,4 +53,27 @@ extension URLRequest {
         return request
     }
     
+    static func postMangaCollection(url: URL, token: String?, userToken: String?, collection: CollectionModel) -> URLRequest {
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if let token {
+            request.setValue(token, forHTTPHeaderField: "App-Token")
+        }
+        if let userToken {
+            request.setValue("Bearer \(userToken)", forHTTPHeaderField: "Authorization")
+            print("userToken usado: \(userToken)")
+        }
+        
+        do {
+            let jsonData = try JSONEncoder().encode(collection)
+            request.httpBody = jsonData
+        } catch {
+            print("Error al codificar JSON al enviar colección: \(error)")
+        }
+        
+        return request
+    }
+    
 }

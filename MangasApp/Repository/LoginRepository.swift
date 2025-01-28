@@ -37,6 +37,5 @@ struct LoginRepository: LoginRepositoryProtocol{
         } else {
             throw NetworkError.badStatusCode(response.statusCode)
         }
-        //data lo guardare en el keychain si el status code es correcto
     }
 }

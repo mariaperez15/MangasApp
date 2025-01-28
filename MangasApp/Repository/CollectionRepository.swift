@@ -10,6 +10,7 @@ import Foundation
 //Todo lo relacionado con los favoritos del usuario (obtener la lista de fav, el post de nuevo manga a la coleccion del user...)
 protocol CollectionRepositoryProtocol: Sendable {
     func getUserCollection() async throws(NetworkError) -> userCollection
+    func postMangaToCollection(collection: CollectionModel) async throws(NetworkError)
 }
 
 struct CollectionRepository: CollectionRepositoryProtocol, NetworkRepositoryProtocol {
@@ -18,5 +19,14 @@ struct CollectionRepository: CollectionRepositoryProtocol, NetworkRepositoryProt
     func getUserCollection() async throws(NetworkError) -> userCollection {
         let token = await apiConfig.readUserToken()
         return try await getJSON(model: userCollection.self, urlRequest: .getCollection(url: .getUserCollection(), token: apiConfig.token, userToken: token))
+    }
+    
+    func postMangaToCollection(collection: CollectionModel) async throws(NetworkError) {
+        let token = await apiConfig.readUserToken()
+        let (_, response) = try await URLSession.shared.getCustomData(urlRequest: .postMangaCollection(url: .getUserCollection(), token: apiConfig.token, userToken: token, collection: collection))
+       
+        if response.statusCode != 201 {
+            throw NetworkError.badStatusCode(response.statusCode)
+        }
     }
 }

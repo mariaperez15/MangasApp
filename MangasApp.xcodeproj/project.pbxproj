@@ -10,6 +10,7 @@
 		FC4564F12D42E3DD00710043 /* CollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4564F02D42E3DD00710043 /* CollectionModel.swift */; };
 		FC4564F32D42E9F300710043 /* CollectionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4564F22D42E9F300710043 /* CollectionVM.swift */; };
 		FC4564F52D496F9C00710043 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4564F42D496F9C00710043 /* CollectionView.swift */; };
+		FC4564F72D49909200710043 /* AddMangaSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4564F62D49909200710043 /* AddMangaSheetView.swift */; };
 		FC53168E2D23FBF000B12F77 /* SubFiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC53168D2D23FBF000B12F77 /* SubFiltersView.swift */; };
 		FC5316902D244D3C00B12F77 /* MangaListComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC53168F2D244D3C00B12F77 /* MangaListComponent.swift */; };
 		FC5316932D244F9700B12F77 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5316922D244F9700B12F77 /* HomeView.swift */; };
@@ -47,6 +48,7 @@
 		FC4564F02D42E3DD00710043 /* CollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionModel.swift; sourceTree = "<group>"; };
 		FC4564F22D42E9F300710043 /* CollectionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionVM.swift; sourceTree = "<group>"; };
 		FC4564F42D496F9C00710043 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
+		FC4564F62D49909200710043 /* AddMangaSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMangaSheetView.swift; sourceTree = "<group>"; };
 		FC53168D2D23FBF000B12F77 /* SubFiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubFiltersView.swift; sourceTree = "<group>"; };
 		FC53168F2D244D3C00B12F77 /* MangaListComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaListComponent.swift; sourceTree = "<group>"; };
 		FC5316922D244F9700B12F77 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				FCF36F502D3701F000D07800 /* RegisterView.swift */,
 				FCF36F632D3ED87200D07800 /* LoginView.swift */,
 				FC4564F42D496F9C00710043 /* CollectionView.swift */,
+				FC4564F62D49909200710043 /* AddMangaSheetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				FCF36F512D3701F000D07800 /* RegisterView.swift in Sources */,
 				FCF36F532D37082900D07800 /* LoginVM.swift in Sources */,
 				FCA04BAA2D1EC2730013A437 /* URLRequest.swift in Sources */,
+				FC4564F72D49909200710043 /* AddMangaSheetView.swift in Sources */,
 				FC5316932D244F9700B12F77 /* HomeView.swift in Sources */,
 				FCA04BAC2D1ECA140013A437 /* PreviewDataRepository.swift in Sources */,
 				FCF56D9E2D0E0A4B00255E87 /* MangasRepository.swift in Sources */,
