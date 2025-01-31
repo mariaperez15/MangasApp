@@ -29,4 +29,12 @@ struct CollectionRepository: CollectionRepositoryProtocol, NetworkRepositoryProt
             throw NetworkError.badStatusCode(response.statusCode)
         }
     }
+    
+    func deleteMangaFromCollection(mangaId: Int) async throws(NetworkError) {
+        let token = await apiConfig.readUserToken()
+        let (_, response) = try await URLSession.shared.getCustomData(urlRequest: .deleteMangaCollection(url: .deleteMangaFromCollection(mangaId: mangaId), token: apiConfig.token, userToken: token))
+        if response.statusCode != 200 {
+            throw NetworkError.badStatusCode(response.statusCode)
+        }
+    }
 }

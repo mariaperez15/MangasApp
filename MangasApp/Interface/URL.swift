@@ -64,6 +64,13 @@ extension URL {
             .appending(path: "collection")
             .appending(path: "manga")
     }
+    
+    static func deleteMangaFromCollection(mangaId: Int) -> URL {
+        mainURL
+            .appending(path: "collection")
+            .appending(path: "manga")
+            .appending(path: "\(mangaId)")
+    }
 }
 
 extension URLQueryItem {

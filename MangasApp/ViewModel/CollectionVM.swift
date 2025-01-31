@@ -12,6 +12,7 @@ import Foundation
 final class CollectionVM {
     let repository: CollectionRepositoryProtocol
     var collection: userCollection = []
+    var isSheetPresented = false
     //hacer como con el user cuando se pasa en el register
     var manga: Int = 0 //aqui hay que poner 0 o nada?
     var completeCollection: Bool = false
@@ -35,8 +36,17 @@ final class CollectionVM {
         let collectionToAdd = CollectionModel(manga: manga, completeCollection: completeCollection, volumesOwned: volumesOwned, readingVolume: readingVolume)
         do {
             try await repository.postMangaToCollection(collection: collectionToAdd)
+            resetValues()
+            isSheetPresented.toggle()
         } catch {
             print("adding collection error:\(error)")
         }
+    }
+    
+    func resetValues() {
+        manga = 0
+        completeCollection = false
+        volumesOwned = []
+        readingVolume = 0
     }
 }

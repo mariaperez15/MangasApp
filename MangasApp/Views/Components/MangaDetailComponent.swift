@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct MangaDetailComponent: View {
+    @Environment(CollectionVM.self) var vm
     let manga: MangaModel
     @State var expandSynopsis = false
-    @State var isSheetPresented = false
     
     var body: some View {
+        @Bindable var bvm = vm
         ScrollView {
             VStack() {
                 mangaImage
@@ -20,7 +21,7 @@ struct MangaDetailComponent: View {
                     mangaTitle
                         .padding()
                     Button {
-                        isSheetPresented.toggle()
+                        vm.isSheetPresented.toggle()
                     } label: {
                         Image(systemName: "plus.square.fill")
                             .font(.title)
@@ -36,8 +37,8 @@ struct MangaDetailComponent: View {
                 
             }
             .animation(.smooth, value: expandSynopsis)
-            .sheet(isPresented: $isSheetPresented) {
-                AddMangaSheetView()
+            .sheet(isPresented: $bvm.isSheetPresented) {
+                AddMangaSheetView(mangaId: manga.id)
             }
         }
         .ignoresSafeArea(edges: .top)
@@ -79,4 +80,5 @@ struct MangaDetailComponent: View {
 
 #Preview {
     MangaDetailComponent(manga: .mangaPreview)
+        .environment(CollectionVM.init())
 }

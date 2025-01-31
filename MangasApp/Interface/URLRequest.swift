@@ -76,4 +76,20 @@ extension URLRequest {
         return request
     }
     
+    static func deleteMangaCollection(url: URL, token: String?, userToken: String?) -> URLRequest {
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if let token {
+            request.setValue(token, forHTTPHeaderField: "App-Token")
+        }
+        if let userToken {
+            request.setValue("Bearer \(userToken)", forHTTPHeaderField: "Authorization")
+            print("userToken usado: \(userToken)")
+        }
+        
+        return request
+    }
+    
 }
