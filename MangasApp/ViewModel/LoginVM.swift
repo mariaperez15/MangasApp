@@ -87,3 +87,5 @@ final class LoginVM {
 
 
 //TODO: PREGUNTA, lo de intentar que me devuelva la colección y si la devuelve esta bien el token y entonces entrar en el login
+//TODO: ME falta paginar lo de get collection y no se si algo mas
+//TODO: en best manga mostrar solo los 5 o 6 primeros

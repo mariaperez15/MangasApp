@@ -14,12 +14,6 @@ struct MangasListView: View {
     var body: some View {
         @Bindable var bvm = vm //para cuando el viewmodel se pasa como enviroment
         MangaListComponent()
-        /*.task {
-            if vm.mangas.isEmpty {
-                await vm.loadMangas()
-            }
-        }
-         */
             .navigationTitle(vm.currentFilter.description == "Show all mangas" || vm.currentFilter.description == "Show best mangas" ? vm.currentFilter.rawValue : vm.selectedSubfilter)
         .navigationBarTitleDisplayMode(.inline)
         .searchable(text: $bvm.searchedText, prompt: "Search manga by name")

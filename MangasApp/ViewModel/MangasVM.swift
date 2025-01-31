@@ -182,6 +182,7 @@ final class MangasVM {
     
     func loadBestMangas() async {
         do {
+            print("cargando best mangas")
             mangas.removeAll()
             let data = try await repository.getBestMangas(page: String(page))
             self.mangasInfo = data

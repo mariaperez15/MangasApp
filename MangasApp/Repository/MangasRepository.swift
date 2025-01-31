@@ -35,7 +35,7 @@ struct MangasRepository: MangasRepositoryProtocol, NetworkRepositoryProtocol {
     
     func getBestMangas(page: String) async throws(NetworkError) -> MangasModel {
         try await getJSON(model: MangasModelDTO.self, urlRequest: .getMangasRequest(url: .getBestMangas(page: page))).mapToModel
-    }
+    }    
         
 }
 

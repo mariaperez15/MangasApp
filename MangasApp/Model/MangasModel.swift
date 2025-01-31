@@ -28,7 +28,7 @@ struct MangaModel: Codable, Identifiable, Hashable {
     let score: Double
     let title: String
     let startDate: String?
-    let titleEnglish: String
+    let titleEnglish: String?
     let authors: [AuthorsModel]
     let demographics: [DemographicsModel]
     

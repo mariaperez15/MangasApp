@@ -55,19 +55,7 @@ struct SubFiltersView: View {
             //.frame(maxWidth: .infinity)
             .padding(.horizontal, 20)
             .frame(height: 65)
-            .background(
-                LinearGradient(
-                    colors: [
-                        //Color(red: 0.2, green: 0.5, blue: 0.9),
-                        //Color(red: 0.3, green: 0.6, blue: 1.0)
-                        Color(red: 0.98, green: 0.85, blue: 0.98),
-                        Color(red: 0.92, green: 0.87, blue: 0.99)
-                        
-                    ],
-                    startPoint: .leading,
-                    endPoint: .trailing
-                )
-            )
+            .background(.blue)
             .clipShape(RoundedRectangle(cornerRadius: 15))
             .shadow(color: .blue.opacity(0.2), radius: 8, x: 0, y: 4)
         }

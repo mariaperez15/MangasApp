@@ -11,7 +11,7 @@ struct HomeView: View {
     var body: some View {
         TabView {
             Tab {
-                
+               BestMangasView()
             } label: {
                 Label("Reading now", systemImage: "book.fill")
             }

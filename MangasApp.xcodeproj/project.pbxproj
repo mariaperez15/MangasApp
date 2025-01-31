@@ -22,6 +22,7 @@
 		FCA04BB42D1F62EC0013A437 /* MangaCellComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA04BB32D1F62EC0013A437 /* MangaCellComponent.swift */; };
 		FCA04BB92D215A700013A437 /* MangaDetailComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA04BB82D215A700013A437 /* MangaDetailComponent.swift */; };
 		FCA04BBB2D2171480013A437 /* FiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA04BBA2D2171480013A437 /* FiltersView.swift */; };
+		FCDF62972D4D25A0005ADB88 /* BestMangasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDF62962D4D25A0005ADB88 /* BestMangasView.swift */; };
 		FCF36F512D3701F000D07800 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF36F502D3701F000D07800 /* RegisterView.swift */; };
 		FCF36F532D37082900D07800 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF36F522D37082900D07800 /* LoginVM.swift */; };
 		FCF36F572D37165200D07800 /* APIConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCF36F562D37165200D07800 /* APIConfig.plist */; };
@@ -60,6 +61,7 @@
 		FCA04BB32D1F62EC0013A437 /* MangaCellComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaCellComponent.swift; sourceTree = "<group>"; };
 		FCA04BB82D215A700013A437 /* MangaDetailComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaDetailComponent.swift; sourceTree = "<group>"; };
 		FCA04BBA2D2171480013A437 /* FiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersView.swift; sourceTree = "<group>"; };
+		FCDF62962D4D25A0005ADB88 /* BestMangasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestMangasView.swift; sourceTree = "<group>"; };
 		FCF36F502D3701F000D07800 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		FCF36F522D37082900D07800 /* LoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
 		FCF36F562D37165200D07800 /* APIConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = APIConfig.plist; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				FCF36F632D3ED87200D07800 /* LoginView.swift */,
 				FC4564F42D496F9C00710043 /* CollectionView.swift */,
 				FC4564F62D49909200710043 /* AddMangaSheetView.swift */,
+				FCDF62962D4D25A0005ADB88 /* BestMangasView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				FCF36F512D3701F000D07800 /* RegisterView.swift in Sources */,
 				FCF36F532D37082900D07800 /* LoginVM.swift in Sources */,
 				FCA04BAA2D1EC2730013A437 /* URLRequest.swift in Sources */,
+				FCDF62972D4D25A0005ADB88 /* BestMangasView.swift in Sources */,
 				FC4564F72D49909200710043 /* AddMangaSheetView.swift in Sources */,
 				FC5316932D244F9700B12F77 /* HomeView.swift in Sources */,
 				FCA04BAC2D1ECA140013A437 /* PreviewDataRepository.swift in Sources */,
