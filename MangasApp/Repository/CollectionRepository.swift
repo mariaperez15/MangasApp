@@ -11,6 +11,7 @@ import Foundation
 protocol CollectionRepositoryProtocol: Sendable {
     func getUserCollection() async throws(NetworkError) -> userCollection
     func postMangaToCollection(collection: CollectionModel) async throws(NetworkError)
+    func deleteMangaFromCollection(mangaId: Int) async throws(NetworkError)
 }
 
 struct CollectionRepository: CollectionRepositoryProtocol, NetworkRepositoryProtocol {

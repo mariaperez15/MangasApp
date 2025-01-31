@@ -18,6 +18,7 @@ final class CollectionVM {
     var completeCollection: Bool = false
     var volumesOwned: [Int] = []
     var readingVolume: Int = 0
+    var isShowingDeleteAlert = false
     
     init(repository: CollectionRepositoryProtocol = CollectionRepository()) {
         self.repository = repository
@@ -26,7 +27,6 @@ final class CollectionVM {
     func getUserCollection() async {
         do {
            collection = try await repository.getUserCollection()
-            //print(collection)
         } catch {
             print("collection vm error:\(error)")
         }
@@ -38,6 +38,7 @@ final class CollectionVM {
             try await repository.postMangaToCollection(collection: collectionToAdd)
             resetValues()
             isSheetPresented.toggle()
+            await getUserCollection()
         } catch {
             print("adding collection error:\(error)")
         }
@@ -48,5 +49,20 @@ final class CollectionVM {
         completeCollection = false
         volumesOwned = []
         readingVolume = 0
+    }
+    
+    func deleteMangaFromCollection(id: Int) async {
+        do {
+            try await repository.deleteMangaFromCollection(mangaId: id)
+            await getUserCollection()
+        } catch {
+            
+        }
+    }
+    
+    func isInCollection(id: Int) -> Bool {
+        collection.contains { collection in
+            collection.manga.id == id
+        }
     }
 }

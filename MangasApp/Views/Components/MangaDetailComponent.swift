@@ -20,13 +20,29 @@ struct MangaDetailComponent: View {
                 HStack {
                     mangaTitle
                         .padding()
-                    Button {
-                        vm.isSheetPresented.toggle()
-                    } label: {
-                        Image(systemName: "plus.square.fill")
-                            .font(.title)
+                    if !vm.isInCollection(id: manga.id) {
+                        Button {
+                            vm.isSheetPresented.toggle()
+                        } label: {
+                            Image(systemName: "plus.square.fill")
+                                .font(.title)
+                        }
+                    } else {
+                        Button {
+                            vm.isShowingDeleteAlert.toggle()
+                        } label: {
+                            Image(systemName: "trash.slash")
+                                .font(.title)
+                        }
+                        .alert("Do you want to delete manga from collection?", isPresented: $bvm.isShowingDeleteAlert) {
+                            Button("Cancelar", role: .cancel) { }
+                            Button("Eliminar", role: .destructive) {
+                                Task {
+                                    await vm.deleteMangaFromCollection(id: manga.id)
+                                }
+                            }
+                        }
                     }
-                    
                 }
                 mangaSypnosis
                 Button {
