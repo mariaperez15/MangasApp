@@ -35,4 +35,14 @@ actor APIConfig {
         return String(data: data, encoding: .utf8)
     }
     
+    func logout() async {
+        manager.deleteKey(label: "userToken")
+        setToken(nil) 
+        print("User logged out successfully.")
+    }
+
+    private func setToken(_ value: String?) {
+        token = value
+    }
+    
 }
