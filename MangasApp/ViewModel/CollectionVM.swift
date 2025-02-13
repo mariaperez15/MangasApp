@@ -13,8 +13,7 @@ final class CollectionVM {
     let repository: CollectionRepositoryProtocol
     var collection: userCollection = []
     var isSheetPresented = false
-    //hacer como con el user cuando se pasa en el register
-    var manga: Int = 0 //aqui hay que poner 0 o nada?
+    var manga: Int = 0
     var completeCollection: Bool = false
     var volumesOwned: [Int] = []
     var readingVolume: Int = 0

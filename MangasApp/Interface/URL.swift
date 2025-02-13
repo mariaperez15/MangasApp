@@ -10,7 +10,6 @@ import Foundation
 let mainURL = URL(string: "https://mymanga-acacademy-5607149ebe3d.herokuapp.com")!
 
 extension URL {
-    //Endpoint Get all Mangas
     static func getAllMangas(page: String) -> URL {
         mainURL
             .appending(path: "list")
@@ -18,7 +17,6 @@ extension URL {
             .appending(queryItems: [.pageQuery(page: page)])
     }
     
-    //Endpoint Search Manga Contains
     static func searchMangaContains(name: String) -> URL {
         mainURL
             .appending(path: "search")
@@ -26,7 +24,6 @@ extension URL {
             .appending(path: name)
     }
     
-    //Endpoint get mangas by...
     static func getManbasBy(orderBy: String, selectedFilter: String, page: String) -> URL {
         mainURL
             .appending(path: "list")
@@ -70,6 +67,12 @@ extension URL {
             .appending(path: "collection")
             .appending(path: "manga")
             .appending(path: "\(mangaId)")
+    }
+    
+    static func renewUsersToken() -> URL {
+        mainURL
+            .appending(path: "users")
+            .appending(path: "renew")
     }
 }
 

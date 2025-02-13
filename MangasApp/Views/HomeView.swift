@@ -30,8 +30,7 @@ struct HomeView: View {
             Tab {
                 Button {
                     Task {
-                        await APIConfig.shared.logout()
-                        vm.isUserLogged = false
+                        await vm.logOut()
                     }
                 } label: {
                     Label("Log out", systemImage: "power")
@@ -49,4 +48,7 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        .environment(CollectionVM.init())
+        .environment(MangasVM.preview)
+        .environment(LoginVM.preview)
 }

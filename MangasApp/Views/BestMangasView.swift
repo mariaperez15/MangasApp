@@ -12,19 +12,25 @@ struct BestMangasView: View {
     @State private var showPopup = false
     @State private var selectedManga: MangaModel? = nil
     
+    let gridColumns = [
+        GridItem(.flexible(), spacing: 16),
+        GridItem(.flexible(), spacing: 16)
+    ]
+
     var body: some View {
         ZStack {
-            ScrollView(.horizontal) {
-                VStack{
-                    HStack(spacing: 15) {
-                        ForEach(vm.mangas) {manga in
+            Color.white
+                            .edgesIgnoringSafeArea(.all)
+            ScrollView {
+                LazyVGrid(columns: gridColumns, spacing: 20) {
+                    ForEach(vm.mangas) { manga in
+                        VStack(spacing: 10) {
                             AsyncImage(url: manga.cleanURL) { image in
                                 image
                                     .resizable()
-                                    .scaledToFit()
-                                    .frame(maxWidth: .infinity)
-                                    .cornerRadius(12)
-                                    .frame(width: 160)
+                                    .scaledToFill()
+                                    .frame(width: 150, height: 200)
+                                    .cornerRadius(15)
                                     .clipped()
                                     .onTapGesture {
                                         selectedManga = manga
@@ -33,68 +39,83 @@ struct BestMangasView: View {
                                         }
                                     }
                             } placeholder: {
-                                Image(systemName: "photo")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 100, height: 100)
-                                    .cornerRadius(12)
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .frame(width: 150, height: 200)
+                                    Image(systemName: "photo")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 50, height: 50)
+                                }
                             }
                         }
                     }
-                    Spacer()
-                    .task {
-                        await vm.loadBestMangas()
-                    }
-
                 }
-                
+                .padding(.horizontal)
+                .padding(.top, 10)
+                .task {
+                    await vm.loadBestMangas()
+                }
             }
+
             if showPopup, let selectedManga = selectedManga {
-                Color.black.opacity(0.1)
+                Color.black.opacity(0.3)
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
                         withAnimation {
                             showPopup = false
                         }
                     }
-                
-                VStack {
+
+                VStack(spacing: 20) {
                     Text(selectedManga.title)
                         .font(.title2)
                         .bold()
+                        .multilineTextAlignment(.center)
                         .padding()
-                    
+
                     AsyncImage(url: selectedManga.cleanURL) { image in
                         image
                             .resizable()
                             .scaledToFit()
-                            .cornerRadius(12)
+                            .cornerRadius(15)
+                            .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 5)
                     } placeholder: {
                         ProgressView()
                     }
-                    .frame(width: 150, height: 200)
+                    .frame(width: 200, height: 300)
+
                     Text(selectedManga.sypnosis)
                         .font(.body)
                         .multilineTextAlignment(.center)
-                        .padding()
-                    
-                    Button("Cerrar") {
+                        .padding(.horizontal)
+
+                    Button(action: {
                         withAnimation {
                             showPopup = false
                         }
+                    }) {
+                        Text("Cerrar")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(width: 100)
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                            .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 5)
                     }
-                    .padding()
                 }
-                .frame(width: 300)
+                .frame(width: 320)
+                .padding()
                 .background(Color.white)
-                .cornerRadius(15)
+                .cornerRadius(20)
                 .shadow(radius: 10)
                 .transition(.scale)
             }
         }
+        .background(Color(UIColor.systemGroupedBackground).edgesIgnoringSafeArea(.all))
     }
 }
-
 
 #Preview {
     BestMangasView()

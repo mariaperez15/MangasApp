@@ -13,8 +13,6 @@ struct AddMangaSheetView: View {
     
     var body: some View {
         @Bindable var bvm = vm
-        //Hacer vista con botones que rellenen los campos del vm de collecion con el $ para que esten vinculados
-        
         
         VStack{
             Toggle("Colección completa", isOn: $bvm.completeCollection)
@@ -45,7 +43,6 @@ struct AddMangaSheetView: View {
                 }
             } label: {
                 Text("Añadir manga a la colección")
-                //TODO: una vez añadido poner texto de quitar de la colección, es decir hacer un toggle con una propiedad bool que diga si esta o no en la colección)
                     .padding()
                     .background(Color.blue)
                     .foregroundColor(.white)

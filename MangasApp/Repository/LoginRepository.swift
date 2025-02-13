@@ -7,11 +7,10 @@
 
 import Foundation
 
-//Todo lo relacionado con las peticiones de register y login
-
 protocol LoginRepositoryProtocol: Sendable {
     func registUser(user: UserModel) async throws(NetworkError)
-    @discardableResult func loginUser(userAuth: String) async throws(NetworkError) -> String
+    func loginUser(userAuth: String) async throws(NetworkError)
+    func checkUserToken() async throws
 }
 
 struct LoginRepository: LoginRepositoryProtocol{
@@ -24,20 +23,33 @@ struct LoginRepository: LoginRepositoryProtocol{
         }
     }
     
-    @discardableResult
-    func loginUser(userAuth: String) async throws(NetworkError) -> String {
+    func loginUser(userAuth: String) async throws(NetworkError) {
         let (data, response) = try await URLSession.shared.getCustomData(urlRequest: .postUser(url: .loginUser(), token: apiConfig.token, userAuth: userAuth))
         if response.statusCode == 200 {
             KeyChainManager.shared.storeKey(key: data, label: "userToken")
             print("Token guardado")
             print(String(data: data, encoding: .utf8))
-            //print(KeyChainManager.shared.readKey(label: "userToken"))
-            //TODO: cuando vaya bien quitar que devuelva un string
-            return "Usuario logeado correctamente"    
         } else {
             throw NetworkError.badStatusCode(response.statusCode)
         }
     }
     
+    func checkUserToken() async throws {
+        guard let userToken = KeyChainManager.shared.readKey(label: "userToken"),
+              let tokenString = String(data: userToken, encoding: .utf8) else {
+            throw NetworkError.unauthorized
+        }
+        let (data, response) = try await URLSession.shared.data(for: .checkUserRegister(url: .renewUsersToken(), token: apiConfig.token, userToken: tokenString))
+        
+        guard let response = response as? HTTPURLResponse else {
+            throw NetworkError.nonHTTP
+        }
+        
+        if response.statusCode == 200 {
+            KeyChainManager.shared.storeKey(key: data, label: "userToken")
+        } else {
+            throw NetworkError.badStatusCode(response.statusCode)
+        }
+    }
     
 }

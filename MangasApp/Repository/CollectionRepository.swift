@@ -7,7 +7,6 @@
 
 import Foundation
 
-//Todo lo relacionado con los favoritos del usuario (obtener la lista de fav, el post de nuevo manga a la coleccion del user...)
 protocol CollectionRepositoryProtocol: Sendable {
     func getUserCollection() async throws(NetworkError) -> userCollection
     func postMangaToCollection(collection: CollectionModel) async throws(NetworkError)

@@ -11,7 +11,6 @@ import Foundation
 @Observable
 final class LoginVM {
     let repository: LoginRepositoryProtocol
-    let collectionvM = CollectionVM()
     //var email: String = ""
     var email: String = "157mariap@gmail.com"
     //var password: String = ""
@@ -25,6 +24,7 @@ final class LoginVM {
     
     init(repository: LoginRepositoryProtocol = LoginRepository()) {
         self.repository = repository
+        checkIfUserIsLogged()
     }
     
     func registUser() async {
@@ -51,7 +51,6 @@ final class LoginVM {
             try await repository.loginUser(userAuth: auth)
             
             //TODO: ver por que al hacer el getUSerCollection coge el token anterior y no el nuevo
-            await collectionvM.getUserCollection()
             isUserLogged = true
             showAlertLoginError = false
         } catch {
@@ -60,32 +59,27 @@ final class LoginVM {
             showAlertLoginError = true
         }
     }
+    
+    func logOut() async {
+        await APIConfig.shared.logout()
+        isUserLogged = false
+    }
+    
+    func checkIfUserIsLogged() {
+        Task {
+            do {
+                try await repository.checkUserToken()
+                isUserLogged = true
+            } catch {
+                isUserLogged = false
+            }
+        }
+    }
+    
 }
 
 
-/*TODO:
- 1.. Al dar al login, tenemos que decirle al inicio de la app que el usuario se ha logeado correctamente. si llega     "reason": "Unauthorized",, poner un alert de los datos no son correctos, intenelo de nuevo
- 2. TODO: Comprobación de si he hecho bien el login (intentar añadir un manga a la colección, y luego ver si se encuentra en la colección)
- 3. crear metodo de refresh token (pasar token actual y ahi sabre si es okey y me dara uno nuevo en ese caso y sino no se)
- 4. hacer renew cada vez que se abra la app
- (si el token esta caducado, es decir devuelve un 401, habrá que mandar al usuario al login de nuevo
- 5. Como hacer que persista, es decir que no vuelva a pasar por el login si ya esta registrado
- */
 
 
-//TODO: Opción de log out
-/*
- 1. En el detalle, añadir un boton de "añadir manga a la colección (no es un post,
- 2. crear grid view para elegir el user los mangas que tiene
- */
-
-//TODO: zanjar el tema de postear un manga, dandole a un boton de añadir a colección y que ahi se haga el post
-/*
- 1. boton en el detalle que sea agregar a mi colección. Este boton deberá desplegar algo tipo un sheet, que ponga volumesOwned, por cual va lyendo y debajo un boton de confirm que cuando se le pulse, llamara a un metodo del VM que añadira un manga a la colección (pasando el id del manga, poner el volumes owned y por cual va que seran dos variables published en la vista y por ultimo el complete collection (manga.volumes si es == volumesOwned.count, para sacar el bool)
- 2. una vez añadido a la colección, tendra que bajar el sheeet y el boton ya no pondra añadir a la colección sino quitar de la colección.
- */
-
-
-//TODO: PREGUNTA, lo de intentar que me devuelva la colección y si la devuelve esta bien el token y entonces entrar en el login
 //TODO: ME falta paginar lo de get collection y no se si algo mas
 //TODO: en best manga mostrar solo los 5 o 6 primeros

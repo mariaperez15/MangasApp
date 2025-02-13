@@ -43,9 +43,6 @@ struct LoginView: View {
                 Text("Your password or email is incorrect, please try again.")
             }
         }
-        .onAppear {
-            vm.showAlertLoginError = false
-        }
     }
 }
 

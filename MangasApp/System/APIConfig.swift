@@ -12,6 +12,9 @@ actor APIConfig {
     private let manager = KeyChainManager.shared
     
     var token: String?
+    var isLogged: Bool {
+        readUserToken() != nil
+    }
     
     private init() {
         Task {
@@ -20,7 +23,6 @@ actor APIConfig {
         print("He cogido el token apiconfig")
     }
     
-    //private mutating func recoverAppToken() throws {
     private func recoverAppToken() throws {
         guard let url = Bundle.main.url(forResource: "APIConfig", withExtension: ".plist") else {
             return

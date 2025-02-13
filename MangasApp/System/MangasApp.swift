@@ -23,8 +23,6 @@ struct MangasApp: App {
                     LoginView()
                 }
             }
-            // si el usuario ya esta logeado, muestro directamente el homeview, sino el loginView
-            //HomeView()
             .environment(mangasVM)
             .environment(usersVM)
             .environment(collectionVM)

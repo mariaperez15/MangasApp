@@ -134,9 +134,9 @@ final class MangasVM {
     }
     
     func setFilter(filter: Filters?, optionSelected: String?) {
+        resetMangas()
         if let filter = filter {
             if currentFilter != filter {
-                resetMangas()
                 currentFilter = filter
             }
         }

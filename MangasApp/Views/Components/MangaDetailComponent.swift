@@ -77,7 +77,6 @@ struct MangaDetailComponent: View {
         }
         .background(ignoresSafeAreaEdges: .top)
         .shadow(radius: 10)
-        //.frame(height: 300)
         
     }
     private var mangaTitle: some View {

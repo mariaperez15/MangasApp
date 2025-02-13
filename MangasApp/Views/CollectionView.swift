@@ -12,14 +12,26 @@ struct CollectionView: View {
     
     var body: some View {
         NavigationStack {
-            List(vm.collection) { collection in
-                NavigationLink(value: collection.manga) {
-                    MangaCellComponent(manga: collection.manga)
+            Group {
+                if vm.collection.isEmpty {
+                    VStack {
+                        Text("Aún no tienes ningún manga en tu colección")
+                            .font(.headline)
+                            .foregroundColor(.gray)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                    }
+                } else {
+                    List(vm.collection) { collection in
+                        NavigationLink(value: collection.manga) {
+                            MangaCellComponent(manga: collection.manga)
+                        }
+                    }
+                    .listStyle(.plain)
                 }
             }
-            .listStyle(.plain)
             .task {
-               await vm.getUserCollection()
+                await vm.getUserCollection()
             }
             .navigationTitle("Your collection")
             .navigationBarTitleDisplayMode(.inline)
