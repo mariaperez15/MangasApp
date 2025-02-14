@@ -33,12 +33,9 @@ extension URLRequest {
         if let userAuth {
             request.setValue(userAuth, forHTTPHeaderField: "Authorization")
         }
-        
-        
         return request
     }
     
-    //TODO: ver que le falta o sobra
     static func getCollection(url: URL, token: String?, userToken: String?) -> URLRequest {
         var request = URLRequest(url: url)
         if let token {
@@ -48,8 +45,6 @@ extension URLRequest {
             request.setValue("Bearer \(userToken)", forHTTPHeaderField: "Authorization")
             print("userToken usado: \(userToken)")
         }
-        //Esto hay que ponerlo? request.setValue("accept", forHTTPHeaderField: "application/json")
-        
         return request
     }
     
@@ -65,14 +60,12 @@ extension URLRequest {
             request.setValue("Bearer \(userToken)", forHTTPHeaderField: "Authorization")
             print("userToken usado: \(userToken)")
         }
-        
         do {
             let jsonData = try JSONEncoder().encode(collection)
             request.httpBody = jsonData
         } catch {
             print("Error al codificar JSON al enviar colección: \(error)")
         }
-        
         return request
     }
     
@@ -88,7 +81,6 @@ extension URLRequest {
             request.setValue("Bearer \(userToken)", forHTTPHeaderField: "Authorization")
             print("userToken usado: \(userToken)")
         }
-        
         return request
     }
     
@@ -104,9 +96,6 @@ extension URLRequest {
             request.setValue("Bearer \(userToken)", forHTTPHeaderField: "Authorization")
             print("userToken usado: \(userToken)")
         }
-        
         return request
-
     }
-    
 }

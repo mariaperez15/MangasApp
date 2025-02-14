@@ -15,7 +15,7 @@ struct HomeView: View {
             Tab {
                 BestMangasView()
             } label: {
-                Label("Reading now", systemImage: "book.fill")
+                Label("Best mangas", systemImage: "book.fill")
             }
             Tab {
                 CollectionView()

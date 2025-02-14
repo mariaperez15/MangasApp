@@ -16,11 +16,11 @@ struct BestMangasView: View {
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
     ]
-
+    
     var body: some View {
         ZStack {
             Color.white
-                            .edgesIgnoringSafeArea(.all)
+                .edgesIgnoringSafeArea(.all)
             ScrollView {
                 LazyVGrid(columns: gridColumns, spacing: 20) {
                     ForEach(vm.mangas) { manga in
@@ -57,7 +57,7 @@ struct BestMangasView: View {
                     await vm.loadBestMangas()
                 }
             }
-
+            
             if showPopup, let selectedManga = selectedManga {
                 Color.black.opacity(0.3)
                     .edgesIgnoringSafeArea(.all)
@@ -66,14 +66,14 @@ struct BestMangasView: View {
                             showPopup = false
                         }
                     }
-
+                
                 VStack(spacing: 20) {
                     Text(selectedManga.title)
                         .font(.title2)
                         .bold()
                         .multilineTextAlignment(.center)
                         .padding()
-
+                    
                     AsyncImage(url: selectedManga.cleanURL) { image in
                         image
                             .resizable()
@@ -84,12 +84,12 @@ struct BestMangasView: View {
                         ProgressView()
                     }
                     .frame(width: 200, height: 300)
-
+                    
                     Text(selectedManga.sypnosis)
                         .font(.body)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
-
+                    
                     Button(action: {
                         withAnimation {
                             showPopup = false

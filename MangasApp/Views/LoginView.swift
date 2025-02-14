@@ -27,8 +27,7 @@ struct LoginView: View {
                         Text("Register")
                             .fontWeight(.bold)
                             .foregroundColor(Color.blue)
-                    }
-                    
+                    }                    
                 }
                 .padding(.bottom, 40)
             }

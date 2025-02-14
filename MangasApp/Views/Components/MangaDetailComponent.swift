@@ -76,8 +76,7 @@ struct MangaDetailComponent: View {
                 .cornerRadius(12)
         }
         .background(ignoresSafeAreaEdges: .top)
-        .shadow(radius: 10)
-        
+        .shadow(radius: 10)        
     }
     private var mangaTitle: some View {
         Text(manga.title)

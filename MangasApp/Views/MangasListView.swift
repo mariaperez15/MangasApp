@@ -12,20 +12,10 @@ struct MangasListView: View {
     @State private var timer: Timer?
     
     var body: some View {
-        @Bindable var bvm = vm //para cuando el viewmodel se pasa como enviroment
+        @Bindable var bvm = vm
         MangaListComponent()
             .navigationTitle(vm.currentFilter.description == "Show all mangas" || vm.currentFilter.description == "Show best mangas" ? vm.currentFilter.rawValue : vm.selectedSubfilter)
         .navigationBarTitleDisplayMode(.inline)
-        .searchable(text: $bvm.searchedText, prompt: "Search manga by name")
-        .onChange(of: vm.searchedText) {
-            timer?.invalidate()
-            timer = .scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
-                Task {
-                    await vm.resetMangas()
-                    await vm.loadMangas()
-                }
-            }
-        }
     }
 }
 

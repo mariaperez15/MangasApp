@@ -51,7 +51,6 @@ struct MangaCellComponent: View {
             .lineLimit(1)
     }
     private var mangaSynopsis: some View {
-        //TODO: puntuación
         Text(manga.sypnosis)
             .lineLimit(2)
             .font(.subheadline)

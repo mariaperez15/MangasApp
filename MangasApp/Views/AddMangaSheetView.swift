@@ -47,14 +47,12 @@ struct AddMangaSheetView: View {
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(10)
-                
             }
             .padding(.top)
         }
         .onAppear() {
             bvm.manga = mangaId
-        }
-        
+        }        
     }
 }
 

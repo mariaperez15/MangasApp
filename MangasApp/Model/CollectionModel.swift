@@ -21,7 +21,6 @@ struct UserCollectionModel: Codable, Identifiable, Hashable {
     var id: UUID
 }
 
-//POST new manga
 struct CollectionModel: Codable {
     var manga: Int
     var completeCollection: Bool

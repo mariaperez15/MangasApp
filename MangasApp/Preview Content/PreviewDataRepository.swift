@@ -114,7 +114,6 @@ extension MangaModel {
             )
         ]
     )
-
 }
 
 @MainActor

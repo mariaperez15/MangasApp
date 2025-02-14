@@ -11,10 +11,8 @@ import Foundation
 @Observable
 final class LoginVM {
     let repository: LoginRepositoryProtocol
-    //var email: String = ""
-    var email: String = "157mariap@gmail.com"
-    //var password: String = ""
-    var password: String = "12345678"
+    var email: String = ""
+    var password: String = ""
     var isUserLogged = false
     var showAlertLoginError = false
     var showAlertErrorRegister = false
@@ -31,7 +29,6 @@ final class LoginVM {
         let user = UserModel(email: email, password: password)
         do {
             try await repository.registUser(user: user)
-            //TODO: si se registra y va bien, tener propiedad booleana y lanzarla como un alert y ponga usuario registrado con exito y tenga un boton que ponga ok y que me lleve al login
             showAlertErrorRegister = false
             registerOkAlert = true
         } catch {
@@ -49,8 +46,6 @@ final class LoginVM {
         let auth = "Basic \(encodedCredentials.base64EncodedString())"
         do {
             try await repository.loginUser(userAuth: auth)
-            
-            //TODO: ver por que al hacer el getUSerCollection coge el token anterior y no el nuevo
             isUserLogged = true
             showAlertLoginError = false
         } catch {
@@ -77,9 +72,3 @@ final class LoginVM {
     }
     
 }
-
-
-
-
-//TODO: ME falta paginar lo de get collection y no se si algo mas
-//TODO: en best manga mostrar solo los 5 o 6 primeros

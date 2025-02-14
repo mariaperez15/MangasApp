@@ -52,7 +52,6 @@ struct SubFiltersView: View {
                     .padding(.trailing)
                     .fontWeight(.semibold)
             }
-            //.frame(maxWidth: .infinity)
             .padding(.horizontal, 20)
             .frame(height: 65)
             .background(.blue)

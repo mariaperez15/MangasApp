@@ -146,8 +146,6 @@ final class MangasVM {
                 selectedSubfilter = optSelected
             }
         }
-        //mirar si aquí hay que resetear o no esto
-        //resetMangas()
         Task {
             await loadMangas()
         }
@@ -155,7 +153,6 @@ final class MangasVM {
     
     func loadMangasBy(orderBy: String, param: String) async {
         do {
-            //mangas.removeAll()
             let data = try await repository.getMangaBy(orderBy: orderBy, selectedFilter: param, page: String(page))
             self.mangasInfo = data
             mangas += data.items
